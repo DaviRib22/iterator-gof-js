@@ -1,0 +1,60 @@
+Padrão GoF — Iterator (JavaScript)
+O que é o Padrão Iterator?
+O Iterator é um padrão de projeto comportamental que fornece uma maneira de acessar sequencialmente os elementos de uma coleção sem expor sua representação interna (lista, pilha, árvore, etc.).
+
+"Provide a way to access the elements of an aggregate object sequentially without exposing its underlying representation."
+— Gang of Four
+
+
+Quando usar?
+
+Quando a coleção tem estrutura interna complexa e você quer ocultar sua complexidade dos clientes
+Quando há código de travessia duplicado em vários lugares da aplicação
+Quando você quer iterar sobre diferentes tipos de coleções usando a mesma interface
+Para respeitar o Princípio da Responsabilidade Única (SRP) e o Princípio Aberto/Fechado (OCP)
+
+
+Estrutura do Exemplo
+iterator-gof-js/
+├── BookIterator.js   # ConcreteIterator — lógica de travessia
+├── BookShelf.js      # ConcreteAggregate — coleção encapsulada
+├── index.js          # Cliente — usa o padrão
+└── README.md
+Participantes
+ClassePapel GoFResponsabilidadeBookIteratorConcreteIteratorImplementa hasNext() e next()BookShelfConcreteAggregateEncapsula a coleção e cria o iteradorindex.jsClientUsa o iterador sem conhecer a estrutura
+
+Como executar
+bashnode index.js
+Saída esperada
+📚 Estante com 4 livros:
+
+ ➤ Clean Code - Robert C. Martin
+ ➤ Design Patterns - Gang of Four
+ ➤ Refactoring - Martin Fowler
+ ➤ The Pragmatic Programmer
+
+✅ Iteração concluída sem expor a estrutura interna!
+
+🔀 Dois iteradores simultâneos:
+Iterador 1 → Clean Code - Robert C. Martin
+Iterador 2 → Clean Code - Robert C. Martin
+Iterador 2 → Design Patterns - Gang of Four
+Iterador 1 → Design Patterns - Gang of Four
+
+Vantagens do Padrão
+
+✅ Princípio Aberto/Fechado — novos tipos de coleções e iteradores sem quebrar código existente
+✅ Princípio da Responsabilidade Única — lógica de travessia separada da coleção
+✅ Iteração em paralelo — múltiplos iteradores simultâneos na mesma coleção
+✅ Pausar e retomar — iteração pode ser interrompida e continuada
+
+
+Iterator nativo em JavaScript
+O JS já implementa o protocolo Iterator nativamente via Symbol.iterator:
+js// Arrays já são iteráveis!
+for (const book of shelf._books) {
+  console.log(book);
+}
+O padrão GoF formaliza esse conceito para coleções customizadas.
+
+Disciplina: Padrões de Projeto | Padrão: GoF Comportamental — Iterator
