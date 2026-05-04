@@ -1,0 +1,29 @@
+/**
+ * Padrão GoF - Iterator
+ * Classe ConcreteAggregate: coleção de livros
+ * Encapsula a estrutura interna e expõe apenas o iterador
+ */
+const BookIterator = require('./BookIterator');
+
+class BookShelf {
+  constructor() {
+    this._books = []; // estrutura interna ocultada
+  }
+
+  // Adiciona um livro à estante
+  add(book) {
+    this._books.push(book);
+  }
+
+  // Retorna o tamanho da coleção
+  size() {
+    return this._books.length;
+  }
+
+  // Fábrica do Iterator — único ponto de acesso à coleção
+  createIterator() {
+    return new BookIterator(this._books);
+  }
+}
+
+module.exports = BookShelf;
