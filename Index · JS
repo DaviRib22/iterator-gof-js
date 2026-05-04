@@ -1,0 +1,35 @@
+/**
+ * Padrão GoF - Iterator
+ * Arquivo cliente: demonstra o uso do padrão
+ *
+ * Execute com: node index.js
+ */
+const BookShelf = require('./BookShelf');
+
+// Montando a coleção
+const shelf = new BookShelf();
+shelf.add('Clean Code - Robert C. Martin');
+shelf.add('Design Patterns - Gang of Four');
+shelf.add('Refactoring - Martin Fowler');
+shelf.add('The Pragmatic Programmer');
+
+console.log(`📚 Estante com ${shelf.size()} livros:\n`);
+
+// Usando o Iterator — cliente NÃO conhece a estrutura interna
+const iterator = shelf.createIterator();
+
+while (iterator.hasNext()) {
+  console.log(' ➤', iterator.next());
+}
+
+console.log('\n✅ Iteração concluída sem expor a estrutura interna!');
+
+// Demonstração: dois iteradores simultâneos na mesma coleção
+console.log('\n🔀 Dois iteradores simultâneos:');
+const it1 = shelf.createIterator();
+const it2 = shelf.createIterator();
+
+console.log('Iterador 1 →', it1.next());
+console.log('Iterador 2 →', it2.next());
+console.log('Iterador 2 →', it2.next());
+console.log('Iterador 1 →', it1.next());
