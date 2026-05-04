@@ -1,0 +1,30 @@
+/**
+ * Padrão GoF - Iterator
+ * Classe ConcreteIterator: percorre a coleção BookShelf
+ */
+class BookIterator {
+  constructor(books) {
+    this._books = books;
+    this._index = 0;
+  }
+
+  // Verifica se ainda há elementos a percorrer
+  hasNext() {
+    return this._index < this._books.length;
+  }
+
+  // Retorna o próximo elemento e avança o ponteiro
+  next() {
+    if (!this.hasNext()) {
+      throw new Error('Não há mais elementos na coleção.');
+    }
+    return this._books[this._index++];
+  }
+
+  // Reinicia o iterador do início
+  reset() {
+    this._index = 0;
+  }
+}
+
+module.exports = BookIterator;
